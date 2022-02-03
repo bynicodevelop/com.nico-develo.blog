@@ -1,15 +1,23 @@
 <template>
-  <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <p>admin</p>
-    <slot />
+  <div class="min-h-full flex">
+    <AdminMobileMenu v-model:sidebarOpen="sidebarOpen" />
+    <!-- Static sidebar for desktop -->
+    <AdminSidebar />
+
+    <div class="lg:pl-64 flex flex-col w-0 flex-1">
+      <AdminSearch v-model:sidebarOpen="sidebarOpen" />
+
+      <main class="flex-1">
+        <div class="py-8 xl:py-10">
+          <slot />
+        </div>
+      </main>
+    </div>
   </div>
 </template>
 
-<style lang="css">
-div#__nuxt,
-#__layout,
-#__layout > div,
-#app {
-  height: 100vh !important;
-}
-</style>
+<script setup>
+const sidebarOpen = ref(false);
+
+const { navigation } = useAdminNavigation();
+</script>
