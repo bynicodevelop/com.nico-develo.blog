@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="admin">
-    <button type="button" @click.prevent="onLogout">logout</button>
+    <AdminDashboardOverview />
   </NuxtLayout>
 </template>
 
