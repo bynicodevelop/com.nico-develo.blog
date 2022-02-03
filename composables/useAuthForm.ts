@@ -12,6 +12,7 @@ const schema = yup.object().shape({
 
 export const useAuthForm = () => {
     const { SITE_URL } = useRuntimeConfig();
+    const router = useRouter();
 
     const { onSetCookie, onRemoveCookie } = useCookieManager();
 
@@ -56,6 +57,10 @@ export const useAuthForm = () => {
             await authenticationRepository.login(email.value, password.value);
 
             onSetCookie("authenticated", true);
+
+            router.push({
+                name: "adminer"
+            })
         } catch (error) {
             console.log("error", error);
 
@@ -80,7 +85,9 @@ export const useAuthForm = () => {
 
         onRemoveCookie("authenticated");
 
-        onSuccess("Information", "Vous avez été déconnecté.");
+        router.push({
+            name: "auth"
+        })
     }
 
     return {
